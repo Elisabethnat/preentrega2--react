@@ -1,9 +1,10 @@
-import React from 'react'
+import './CartWidget.css'
 
 const CartWidget = () => {
+  const imgCarrito = "https://cdn-icons-png.flaticon.com/512/107/107831.png";
   return (
     <div>
-      <img style={{width:"3rem"}} src=" ./img/carrito.png" alt="Carrito de compras" />
+      <img className='imgCarrito' src={imgCarrito} alt="Carrito de compras" />
       <strong style={{color:"white"}}> 10 </strong>
     </div>
   )

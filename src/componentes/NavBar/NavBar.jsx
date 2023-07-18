@@ -1,22 +1,21 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import CartWidget from "../CartWidget/CartWidget";
+import './NavBar.css'
 
 const NavBar = () => {
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
-      <Container>
-        <Navbar.Brand href="#home">Total-Fashion</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="#home">Hombre</Nav.Link>
-          <Nav.Link href="#features">Mujer</Nav.Link>
-          <Nav.Link href="#pricing">Niños</Nav.Link>
-        </Nav>
-        <CartWidget/>
-      </Container>
-    </Navbar>
-  );
-};
+    <header>
+      <h1>Total-Fashion</h1>
+      <nav>
+        <ul>
+          <li>Hombres</li>
+          <li>Mujeres</li>
+          <li>Niños</li>
+        </ul>
+      </nav>
+      
+      <CartWidget/>
+      </header>
+  )
+}
 
 export default NavBar;
