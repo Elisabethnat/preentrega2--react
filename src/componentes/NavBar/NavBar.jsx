@@ -1,15 +1,25 @@
-import CartWidget from "../CartWidget/CartWidget";
+import CartWidget from "../CartWidget/CartWidget"
+import { Link, Navlink } from 'react-router-dom'
 import './NavBar.css'
 
 const NavBar = () => {
   return (
     <header>
+      <Link to="/">
       <h1>Total-Fashion</h1>
+      </Link>
+
       <nav>
         <ul>
-          <li>Hombres</li>
-          <li>Mujeres</li>
-          <li>Niños</li>
+          <li>
+            <NavLink to="/categoria/2"> Hombres </NavLink>
+          </li>
+
+          <li>
+           <NavLink to="/categoria/3"> Mujeres </NavLink> 
+          </li>
+          
+
         </ul>
       </nav>
       
@@ -18,4 +28,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar;
+export default NavBar
