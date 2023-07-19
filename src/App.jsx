@@ -6,7 +6,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <NavBar />
+        <NavBar/>
         <Routes>
           <Route path="/" element={ <ItemListContainer/> }/>
           <Route path="/categoria/:idCategoria" element={ <ItemListContainer/> } />
