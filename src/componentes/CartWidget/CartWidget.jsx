@@ -5,7 +5,7 @@ import './CartWidget.css'
 
 
 const CartWidget = () => {
-  const {cantidadTotal} =useContext(CarritoContext);
+  const {cantidadTotal} = useContext(CarritoContext);
   const imgCarrito = "https://cdn-icons-png.flaticon.com/512/107/107831.png";
   return (
     <div>

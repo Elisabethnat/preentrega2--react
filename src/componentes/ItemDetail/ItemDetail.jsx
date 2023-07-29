@@ -14,7 +14,7 @@ const manejadorCantidad = (cantidad) => {
   //console.log("Productos agregados: " + cantidad);
 
   const item = {id, nombre, precio};
-  agregarProducto(Item, cantidad);
+  agregarProducto(item, cantidad);
 }
 
   return (

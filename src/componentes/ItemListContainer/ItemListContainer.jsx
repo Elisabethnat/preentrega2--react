@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import {collection, getDocs, where, query } from "firebase/firestore";
 
-import {db} from "../../services/config";
+import { db } from "../../services/config";
 
 
 
@@ -14,15 +14,6 @@ const ItemListContainer = (props) => {
   const [productos, setProductos] = useState([]);
 
   const { idCategoria } = useParams();
-
-  //useEffect(() => {
-    //const funcion = idCategoria ? getProductosPorCategoria : getProductos;
-
-    //funcion(idCategoria)
-        //.then(res => setProductos(res))
-
-
-  //}, [idCategoria])
 
 useEffect( () => {
 const misProductos = idCategoria ? query(collection(db, "inventario"), where
