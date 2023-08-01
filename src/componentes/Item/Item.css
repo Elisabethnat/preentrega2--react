@@ -1,24 +1,33 @@
 .cardProducto {
-    background-color: azure;
+    background-color: #fff;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 15rem;
     padding: 1rem;
+    margin: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.imgProducto {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .cardProducto:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .imgProducto {
     width: 150px;
-    object-fit: contain;
-}
-
-.btnProducto {
-    background-color: rgb(202, 255, 252);
-    color: white;
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+    margin-bottom: 1rem; 
+  }
+  
+  h3 {
     font-size: 1.2rem;
-    width: 8rem;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-}
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    margin: 0;
+  }
