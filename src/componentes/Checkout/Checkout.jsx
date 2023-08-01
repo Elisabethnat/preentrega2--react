@@ -5,7 +5,7 @@ import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
 //import './Checkout.css'
 
 const Checkout = () => {
-    const { carrito, vaciarCarrito, total, cantidadTotal } = useContext(CarritoContext);
+    const {carrito, vaciarCarrito, total, cantidadTotal } = useContext(CarritoContext);
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
     const [telefono, setTelefono] = useState("");
@@ -14,22 +14,24 @@ const Checkout = () => {
     const [error, setError] = useState("");
     const [orderId, setOrdenId] = useState("");
 
+    
+
     const manejadorFormulario = (e) => {
         e.preventDefault();
 
-         
+        
         if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
             setError("Por favor complete todos los campos");
             return;
         }
 
-        
+    
         if (email !== emailConfirmacion) {
             setError("Los campos del email no coinciden!!");
             return;
         }
 
-        
+         
         const orden = {
             items: carrito.map(producto => ({
                 id: producto.item.id,
@@ -44,11 +46,12 @@ const Checkout = () => {
             precioTotal: total,
             fecha: new Date()
         };
+ 
 
         Promise.all(
             orden.items.map(async (productoOrden) => {
                 const productoRef = doc(db, "productos", productoOrden.id);
-
+                
                 const productoDoc = await getDoc(productoRef);
                 const stockActual = productoDoc.data().stock;
                 
