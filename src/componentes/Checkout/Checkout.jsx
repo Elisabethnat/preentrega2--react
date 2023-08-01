@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { CarritoContext } from '../../context/CarritoContext';
-import { db } from "../../services/config";
+import { db } from "../../service/config";
 import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
-//import './Checkout.css'
+import './Checkout.css'
 
 const Checkout = () => {
     const { carrito, vaciarCarrito, total, cantidadTotal } = useContext(CarritoContext);
@@ -14,21 +14,24 @@ const Checkout = () => {
     const [error, setError] = useState("");
     const [orderId, setOrdenId] = useState("");
 
+    //Funciones y validaciones: 
+
     const manejadorFormulario = (e) => {
         e.preventDefault();
 
+        //Verificamos que los campos esten completos: 
         if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
             setError("Por favor complete todos los campos");
             return;
         }
 
-        
+        //Validamos que los campos del email coincidan: 
         if (email !== emailConfirmacion) {
             setError("Los campos del email no coinciden!!");
             return;
         }
 
-    
+        //Paso 1: Creamos el objeto de la orden. 
         const orden = {
             items: carrito.map(producto => ({
                 id: producto.item.id,
@@ -44,22 +47,24 @@ const Checkout = () => {
             fecha: new Date()
         };
 
+        //Vamos a modificar el código para que ejecute varias promesas en parelelo, por un lado quiero que actualice el stock de productos y por otro lado quiero que genere una orden de compra. Promise.All me permite todo esto. 
+
         Promise.all(
             orden.items.map(async (productoOrden) => {
                 const productoRef = doc(db, "productos", productoOrden.id);
-                
+                //Por cada producto en la coleecion "productos" obtengo una referencia.
                 const productoDoc = await getDoc(productoRef);
                 const stockActual = productoDoc.data().stock;
-                
+                //Data me permite acceder a la información del documento. 
 
                 await updateDoc(productoRef, {
                     stock: stockActual - productoOrden.cantidad
                 });
-                
+                //Modifico el stock y subo la información actualizada. 
             })
         )
             .then(() => {
-                
+                //Guardamos la orden en la base de datos: 
                 addDoc(collection(db, "ordenes"), orden)
                     .then((docRef) => {
                         setOrdenId(docRef.id);
