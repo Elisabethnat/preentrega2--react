@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { CarritoContext } from '../../context/CarritoContext';
+import { CarritoContext } from '../../context/carritoContext';
 import { db } from "../../services/config";
 import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
 //import './Checkout.css'
@@ -47,8 +47,19 @@ const Checkout = () => {
             fecha: new Date()
         };
  
+        addDoc(collection(db, "ordenes"), orden)
+        .then((docRef) => {
+            setOrdenId(docRef.id);
+            vaciarCarrito();
+        })
+        .catch((error) => {
+            console.log("Error al crear la orden", error);
+            setError("Error al crear la orden, vuelva más tarde");
+        })
 
-        Promise.all(
+
+
+        /*Promise.all(
             orden.items.map(async (productoOrden) => {
                 const productoRef = doc(db, "productos", productoOrden.id);
                 
@@ -77,7 +88,7 @@ const Checkout = () => {
             .catch((error) => {
                 console.log("Error al actualizar el stock", error);
                 setError("Error al actualizar el stock. Intente nuevamente");
-            })
+            })*/
 
     }
 
